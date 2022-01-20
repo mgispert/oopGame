@@ -1,9 +1,37 @@
 class Game {
+    constructor(){
+        this.obstaclesArr = [];
+        this.timer = 0;
+    }
+
     start(){
+
+        // create player
         this.player = new Player(); //create an instance of the Player
         this.player.domElement = this.createDomElm(this.player); //create DOM element for the player
         this.drawDomElm(this.player);
+
         this.addEventListeners();
+
+        setInterval(()=>{
+            this.timer++;
+
+            // create obstacles
+            if(this.timer % 3 === 0){
+                const newObstacle = new Obstacle();
+                this.obstaclesArr.push(newObstacle);
+                newObstacle.domElement = this.createDomElm(newObstacle);
+                this.drawDomElm(newObstacle);
+            }
+
+            //move all obstacles in obstaclesArr
+            this.obstaclesArr.forEach((element) => {
+                element.moveDown();
+                this.drawDomElm(element);
+            });
+
+        }, 500);
+
     }
     addEventListeners(){
         document.addEventListener("keydown", (event) => {
@@ -49,6 +77,20 @@ class Player{
     }
 }
 
+class Obstacle{
+    constructor(){
+        this.className = "obstacle";
+        this.positionX = 50;
+        this.positionY = 90;
+        this.width = 10;
+        this.height = 10;
+        this.domElement = null;
+    }
+    moveDown(){
+        this.positionY -= 10;
+        console.log("moving down.... current poistion: " + this.positionX);
+    }
+}
 
 const game = new Game();
 game.start();
