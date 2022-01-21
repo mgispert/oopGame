@@ -81,7 +81,7 @@ class Obstacle{
     constructor(){
         this.className = "obstacle";
         this.positionX = 50;
-        this.positionY = 90;
+        this.positionY = 100;
         this.width = 10;
         this.height = 10;
         this.domElement = null;
