@@ -2,6 +2,8 @@ class Game {
     constructor(){
         this.obstaclesArr = [];
         this.timer = 0;
+        this.refreshRate = 1000 / 60; //60 frames per second
+       
     }
 
     start(){
@@ -17,21 +19,28 @@ class Game {
             this.timer++;
 
             // create obstacles
-            if(this.timer % 8 === 0){
+            if(this.timer % Math.floor(Math.random()* 100) === 0){
                 const newObstacle = new Obstacle();
                 this.obstaclesArr.push(newObstacle);
                 newObstacle.domElement = this.createDomElm(newObstacle);
                 this.drawDomElm(newObstacle);
             }
 
-            //move all obstacles in obstaclesArr
+            //iterate through obstacleArr
             this.obstaclesArr.forEach((obstacle) => {
                 obstacle.moveDown();
                 this.drawDomElm(obstacle);
+
+                /*if(obstacle.positionY < 0){
+                    this.obstaclesArr.shift(obstacle);
+                    let obstacle = document.querySelector('.obstacle');
+                    obstacle.remove();
+                }*/
+
                 this.detectCollisionWithPlayer(obstacle);
             });
 
-        }, 500);
+        }, this.refreshRate);
 
     }
     addEventListeners(){
@@ -90,15 +99,16 @@ class Obstacle{
     constructor(){
         this.className = "obstacle";
         this.positionX = 50;
-        this.positionY = 110;
+        this.positionY = 100;
         this.width = 10;
         this.height = 10;
         this.domElement = null;
     }
     moveDown(){
-        this.positionY -= 10;
+        this.positionY -= 1;
         console.log("moving down.... current poistion: " + this.positionX);
     }
+
 }
 
 const game = new Game();
