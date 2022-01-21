@@ -1,21 +1,20 @@
 body {
-    margin: 0 auto;
-    padding: 0 auto;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
 }
 
 #board {
-    background-color: rgb(104, 200, 255);
-    height: 100vh; 
+  background-color: rgb(104, 200, 255);
+  height: 100vh;
 }
 
 .player {
-    background-color: white;
-   position: absolute;
-   
+  background-color: white;
+  position: absolute;
 }
 
 .obstacle {
-    background-color: violet;
-    position: absolute;
+  background-color: violet;
+  position: absolute;
 }
-
